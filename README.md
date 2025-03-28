@@ -32,15 +32,6 @@ docker-compose up -d --build
 docker-compose ps
 ```
 
-## Services Access
-
-| Service                | PORT  | URL                       |
-| ---------------------- | ----- | ------------------------- |
-| **Users Service**      | 3000  | http://localhost:3000     |
-| **MongoDB**            | 27017 | mongodb://localhost:27017 |
-| **RabbitMQ**           | 5672  | amqp://localhost:5672     |
-| **RabbitMQ Managment** | 15672 | http://localhost:15672    |
-
 ## Development
 
 ```bash
