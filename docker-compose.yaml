@@ -1,25 +1,6 @@
 version: "3.8"
 
 services:
-  mongodb:
-    image: mongo:6.0
-    container_name: users_db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
-      MONGO_INITDB_DATABASE: users
-    volumes:
-      - mongodb_data:/data/db
-    ports:
-      - "27017:27017"
-    healthcheck:
-      test: mongosh --eval "db.adminCommand('ping')" localhost:27017 --quiet
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    networks:
-      - app-network
-
   users-service:
     build:
       context: ./users
@@ -47,27 +28,6 @@ services:
       timeout: 10s
       retries: 3
 
-  rabbitmq:
-    image: rabbitmq:management
-    container_name: rabbitmq
-    hostname: rabbitmq
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
-      RABBITMQ_DEFAULT_PERMISSIONS: ".* .* .*"
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
-    healthcheck:
-      test: rabbitmq-diagnostics -q ping
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    networks:
-      - app-network
-
   notifications-service:
     build:
       context: ./notifications
@@ -88,6 +48,46 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
+
+  mongodb:
+    image: mongo:6.0
+    container_name: users_db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      MONGO_INITDB_DATABASE: users
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: mongosh --eval "db.adminCommand('ping')" localhost:27017 --quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+      RABBITMQ_DEFAULT_PERMISSIONS: ".* .* .*"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - app-network
 
 volumes:
   mongodb_data:
