@@ -13,8 +13,8 @@ A scalable microservices architecture with Users and Notifications services, usi
 
 ## Prerequisites
 
-- Docker v20.10+
-- Docker Compose v1.29+
+- Docker v27.4.0+
+- Docker Compose v2.31.0+
 - Node.js v18+
 - Git
 
@@ -41,11 +41,6 @@ docker-compose ps
 | **RabbitMQ**           | 5672  | amqp://localhost:5672     |
 | **RabbitMQ Managment** | 15672 | http://localhost:15672    |
 
-Default credentials:
-
-MongoDB: admin/admin
-RabbitMQ: admin/admin
-
 ## Development
 
 ```bash
@@ -71,5 +66,5 @@ cd notifications && npm run start:dev
 
 Default credentials:
 
-MongoDB: admin/admin
+MongoDB: admin/admin ||
 RabbitMQ: admin/admin
