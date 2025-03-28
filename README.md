@@ -39,10 +39,16 @@ docker-compose ps
 cd users && npm install
 cd ../notifications && npm install
 
-# Users service
+# Copy environment file for Users service
+cd users && cp .env.example .env
+
+# Copy environment file for Notifications service
+cd ../notifications && cp .env.example .env
+
+# Start Users service in development mode
 cd users && npm run start:dev
 
-# Notifications service
+# Start Notifications service in development mode
 cd notifications && npm run start:dev
 ```
 
